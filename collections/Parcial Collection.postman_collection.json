@@ -1,0 +1,1514 @@
+{
+	"info": {
+		"_postman_id": "899d9556-d7fc-4bc7-b7c1-ce976e1a442a",
+		"name": "Parcial Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20338484"
+	},
+	"item": [
+		{
+			"name": "Socios",
+			"item": [
+				{
+					"name": "Crear Socio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"socioId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario\": \"Diego Eslava\",\n    \"correo\": \"diegof.eslava@gmail.com\",\n    \"fechaNacimiento\": \"1996-09-07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Socio Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"socioId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario\": \"Diego Eslava\",\n    \"correo\": \"diegof.eslava@gmail.com\",\n    \"fechaNacimiento\": \"1996-09-07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los socios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un socio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un socio que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/members/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un socio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario\": \"Diego Fernando Eslava Lozano\",\n    \"correo\": \"diegof.eslava@gmail.com\",\n    \"fechaNacimiento\": \"1996-09-07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un socio que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario\": \"Diego Fernando Eslava Lozano\",\n    \"correo\": \"diegof.eslava@gmail.com\",\n    \"fechaNacimiento\": \"1996-09-07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un socio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"   pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un socio que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The member with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/members/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Clubs",
+			"item": [
+				{
+					"name": "Crear Club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"clubId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Club Inválido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 412\", function () {",
+									"   pm.response.to.have.status(412);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas un club con bellas vistas un club con bellas vistas un club con bellas vistas un club con bellas vistas un club con bellas vistas un club con bellas vistas un club con bellas vistas un club con bellas vistas un club con bellas vistas un club con bellas vistas un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los clubs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener un club que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The club with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre de Bucaramanga\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar un club que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The club with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre de Bucaramanga\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"   pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar un club que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"The club with the given id was not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/clubs/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SociosClubs (asociaciones)",
+			"item": [
+				{
+					"name": "Crear Club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"clubId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Socio 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"socioId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario\": \"Diego Eslava\",\n    \"correo\": \"diegof.eslava@gmail.com\",\n    \"fechaNacimiento\": \"1996-09-07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asociar un miembro 1 a un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clubId\": \"{{clubId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Socio 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"socioId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario\": \"Daniel Gonzalez\",\n    \"correo\": \"daniel.gonzalez@gmail.com\",\n    \"fechaNacimiento\": \"1997-09-07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asociar un miembro 2 a un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clubId\": \"{{clubId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Socio 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"socioId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario\": \"Camila Ramirez\",\n    \"correo\": \"camila.ramirez@gmail.com\",\n    \"fechaNacimiento\": \"1998-10-07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asociar un miembro 3 a un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clubId\": \"{{clubId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asociar un miembro que no existe a un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"Member with the given id not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clubId\": \"{{clubId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener miembros de un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener miembro de un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener miembro que no pertenece a un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"Member not found in the club\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Club 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"clubId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club del campo\",\n    \"fechaFundacion\": \"1995-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club en el campo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar miembro de un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clubId\": \"{{clubId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar miembro no existente de un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"Member with the given id not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clubId\": \"{{clubId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Club 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"clubId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club del este\",\n    \"fechaFundacion\": \"1994-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club en el este\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Socio 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"socioId\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"   pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"usuario\": \"Camilo Ramirez\",\n    \"correo\": \"camilo.ramirez@gmail.com\",\n    \"fechaNacimiento\": \"1998-10-07\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/members",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"members"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asociar un miembro 4 a un club 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"   pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clubId\": \"{{clubId}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar miembro de un club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"   pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/{{socioId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"{{socioId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar miembro de un club Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"   pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"   var data = pm.response.json();",
+									"   pm.expect(data.message).to.eql(\"Member not found in the club\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Club Campestre\",\n    \"fechaFundacion\": \"1997-09-07\",\n    \"imagen\": \"urlimagen.com\",\n    \"descripcion\": \"un club con bellas vistas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/clubs/{{clubId}}/members/c94ae332-7ed8-497f-8065-a2d9f3025249",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"clubs",
+								"{{clubId}}",
+								"members",
+								"c94ae332-7ed8-497f-8065-a2d9f3025249"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1"
+		}
+	]
+}
